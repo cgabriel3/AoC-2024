@@ -1,21 +1,25 @@
 package com.cgabriel.adventofcode2024;
 
 import com.cgabriel.adventofcode2024.vo.HistorianHysteriaVO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-public class HistorianHysteria {
-  @Autowired
-  private AdventOfCodeService adventOfCodeService;
+public class HistorianHysteria extends AbstractInputService {
+  public final static String DAY = "1";
 
-  public HistorianHysteriaVO getInput() {
-    String input = adventOfCodeService.fetchInput("https://adventofcode.com/2024/day/1/input");
+  @Override
+  public String getDay() {
+    return DAY;
+  }
+
+  public HistorianHysteriaVO getVO() {
+    String input = getInput();
     List<Integer> leftNumbers = new ArrayList<>();
     List<Integer> rightNumbers = new ArrayList<>();
-    String[] lines = input.split("\n");for (String line : lines) {
+    String[] lines = input.split("\n");
+    for (String line : lines) {
       String[] parts = line.trim().split("\\s+"); // Split by whitespace
       if (parts.length == 2) {
         leftNumbers.add(Integer.parseInt(parts[0])); // Add left number
@@ -29,19 +33,19 @@ public class HistorianHysteria {
   }
 
   public int getOneStarSolution() {
-    HistorianHysteriaVO historianHysteriaVO = getInput();
+    HistorianHysteriaVO historianHysteriaVO = getVO();
     Collections.sort(historianHysteriaVO.leftNumbers);
     Collections.sort(historianHysteriaVO.rightNumbers);
 
     int sum = 0;
-    for(int i = 0; i < historianHysteriaVO.leftNumbers.size(); i++) {
+    for (int i = 0; i < historianHysteriaVO.leftNumbers.size(); i++) {
       sum += Math.abs(historianHysteriaVO.leftNumbers.get(i) - historianHysteriaVO.rightNumbers.get(i));
     }
     return sum;
   }
 
   public int getTwoStarSolution() {
-    HistorianHysteriaVO historianHysteriaVO = getInput();
+    HistorianHysteriaVO historianHysteriaVO = getVO();
     int sum = 0;
     Map<Integer, Integer> numberFrequency = new HashMap<>();
     for (int i = 0; i < historianHysteriaVO.rightNumbers.size(); i++) {
@@ -56,7 +60,7 @@ public class HistorianHysteria {
     for (int i = 0; i < historianHysteriaVO.leftNumbers.size(); i++) {
       int number = historianHysteriaVO.leftNumbers.get(i);
       if (numberFrequency.containsKey(number)) {
-        sum += number*numberFrequency.get(number);
+        sum += number * numberFrequency.get(number);
       }
     }
     return sum;

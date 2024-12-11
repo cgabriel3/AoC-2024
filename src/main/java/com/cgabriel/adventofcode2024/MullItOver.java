@@ -1,6 +1,5 @@
 package com.cgabriel.adventofcode2024;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,12 +8,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class MullItOver {
-  @Autowired
-  private AdventOfCodeService adventOfCodeService;
+public class MullItOver extends AbstractInputService {
+  public final static String DAY = "3";
 
-  public String getInput() {
-    return adventOfCodeService.fetchInput("https://adventofcode.com/2024/day/3/input");
+  @Override
+  public String getDay() {
+    return DAY;
   }
 
   public int getOneStarSolution() {

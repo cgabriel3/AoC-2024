@@ -1,19 +1,21 @@
 package com.cgabriel.adventofcode2024;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RedNosedReports {
+public class RedNosedReports extends AbstractInputService {
+  public final static String DAY = "2";
 
-  @Autowired
-  private AdventOfCodeService adventOfCodeService;
+  @Override
+  public String getDay() {
+    return DAY;
+  }
 
-  public List<List<Integer>> getInput() {
-    String input = adventOfCodeService.fetchInput("https://adventofcode.com/2024/day/2/input");
+  public List<List<Integer>> getLevel() {
+    String input = getInput();
     String[] lines = input.split("\n");
     List<List<Integer>> levelList = new ArrayList<>();
     for (String line : lines) {
@@ -28,7 +30,7 @@ public class RedNosedReports {
   }
 
   public int getOneStarSolution() {
-    List<List<Integer>> levels = getInput();
+    List<List<Integer>> levels = getLevel();
     int total = 0;
     for (List<Integer> level : levels) {
       if (checkSafe(level)) {
@@ -39,7 +41,7 @@ public class RedNosedReports {
   }
 
   public int getTwoStarSolution() {
-    List<List<Integer>> levels = getInput();
+    List<List<Integer>> levels = getLevel();
     int total = 0;
     for (List<Integer> level : levels) {
       if (checkSafe(level)) {

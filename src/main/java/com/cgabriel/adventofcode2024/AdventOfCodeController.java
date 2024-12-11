@@ -12,6 +12,8 @@ public class AdventOfCodeController {
   private RedNosedReports redNosedReports;
   @Autowired
   private MullItOver mullItOver;
+  @Autowired
+  private CeresSearch ceresSearch;
 
   @GetMapping("/historianHysteria/one-star")
   public int getHistorianHysteriaOneStarSolution() {
@@ -41,5 +43,10 @@ public class AdventOfCodeController {
   @GetMapping("/mullItOver/two-star")
   public int getMullItOverTwoStarSolution() {
     return mullItOver.getTwoStarSolution();
+  }
+
+  @GetMapping("/ceresSearch/one-star")
+  public int getCeresSearchOneStarSolution() {
+    return ceresSearch.getOneStarSolution();
   }
 }
