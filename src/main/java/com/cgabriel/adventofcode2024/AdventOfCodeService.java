@@ -9,7 +9,7 @@ import java.net.URL;
 
 @Service
 public class AdventOfCodeService {
-  private static final String SESSION_COOKIE = "53616c7465645f5ff5a66f317661f31050d82508dd5be756e2577ff0abdc58b9fbf6ad997b83347bc2a9f37bf28b25ae83551789a29e36e1cb8cf399cd17dde8"; // Replace with your session cookie
+  private static final String SESSION_COOKIE = "53616c7465645f5f5688e210a584e764d914755292e12f666fe24d47d4da1fed8acdf2e11f329dd47453ed00f490b0f52a4ab0cc96c6df3e9221efc4da9b655f"; // Replace with your session cookie
 
   public String fetchInput(String questionUrl) {
     StringBuilder content = new StringBuilder();
