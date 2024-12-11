@@ -49,4 +49,9 @@ public class AdventOfCodeController {
   public int getCeresSearchOneStarSolution() {
     return ceresSearch.getOneStarSolution();
   }
+
+  @GetMapping("/ceresSearch/two-star")
+  public int getCeresSearchTwoStarSolution() {
+    return ceresSearch.getTwoStarSolution();
+  }
 }

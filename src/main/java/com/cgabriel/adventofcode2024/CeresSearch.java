@@ -12,6 +12,9 @@ public class CeresSearch extends AbstractInputService {
   public final static String DAY = "4";
   public final static String XMAS = "XMAS";
   public final static String START_OF_WORD = "X";
+  public final static String X_MAS_INDICATOR = "A";
+  public final static String MAS = "MAS";
+  public final static String SAM = "SAM";
 
   @Override
   public String getDay() {
@@ -86,7 +89,7 @@ public class CeresSearch extends AbstractInputService {
     }
     StringBuilder vertical = new StringBuilder();
     for (int k = 0; k < 4; k++) {
-      vertical.append(xmasInputList.get(i).charAt(j+k));
+      vertical.append(xmasInputList.get(i).charAt(j + k));
     }
     return compareStringToXMAS(vertical.toString());
   }
@@ -97,7 +100,7 @@ public class CeresSearch extends AbstractInputService {
     }
     StringBuilder vertical = new StringBuilder();
     for (int k = 0; k < 4; k++) {
-      vertical.append(xmasInputList.get(i).charAt(j-k));
+      vertical.append(xmasInputList.get(i).charAt(j - k));
     }
     return compareStringToXMAS(vertical.toString());
   }
@@ -166,6 +169,43 @@ public class CeresSearch extends AbstractInputService {
       diagonal.append(xmasInputList.get(i + k).charAt(j + k));
     }
     return compareStringToXMAS(diagonal.toString());
+  }
+
+  public int getTwoStarSolution() {
+    String xmasInput = getInput();
+    List<String> xmasInputList = Arrays.stream(xmasInput.split("\n")).toList();
+    int total = 0;
+    for (int i = 0; i < xmasInputList.size(); i++) {
+      for (int j = 0; j < xmasInputList.get(i).length(); j++) {
+        if (xmasInputList.get(i).charAt(j) == X_MAS_INDICATOR.charAt(0)) {
+          if (checkXMASPattern(i, j, xmasInputList)) {
+            total++;
+          }
+        }
+      }
+    }
+    return total;
+  }
+
+  public boolean checkXMASPattern(int i, int j, List<String> xmasInputList) {
+    if (i < 1 || j < 1 || i > xmasInputList.size() - 2 || j > xmasInputList.get(i).length() - 2) {
+      return false;
+    }
+
+    StringBuilder left = new StringBuilder();
+    left.append(xmasInputList.get(i - 1).charAt(j - 1));
+    left.append(xmasInputList.get(i).charAt(j));
+    left.append(xmasInputList.get(i + 1).charAt(j + 1));
+
+    StringBuilder right = new StringBuilder();
+    right.append(xmasInputList.get(i - 1).charAt(j + 1));
+    right.append(xmasInputList.get(i).charAt(j));
+    right.append(xmasInputList.get(i + 1).charAt(j - 1));
+    return compareStringToMas(left.toString()) && compareStringToMas(right.toString());
+  }
+
+  public boolean compareStringToMas(String str) {
+    return str.equals(MAS) || str.equals(SAM);
   }
 
   public boolean compareStringToXMAS(String str) {
